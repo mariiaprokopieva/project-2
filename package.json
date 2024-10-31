@@ -1,0 +1,11 @@
+{
+  "name": "project-2",
+  "version": "1.0.0",
+  "description": "This project's aim is to practice locating web elements for logging in, logging out, resetting passwords and handling input fields",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mariia_prokopieva",
+  "license": "ISC"
+}
