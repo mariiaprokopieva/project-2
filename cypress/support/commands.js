@@ -12,6 +12,18 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
+/**
+ * @param {array} credentials - array with two string elements, username and password
+ * @description entering provided credentials into input boxes and clicks submit button
+ */
+    Cypress.Commands.add('enterSubmitCredentials', (credentials) => {
+        cy.get('form input').each(($el, index) => {
+            cy.wrap($el).type(credentials[index]);
+        });
+    
+        cy.get('#login_btn').click();
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })

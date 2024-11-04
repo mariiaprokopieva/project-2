@@ -1,16 +1,4 @@
 /// <reference types="cypress"/>
-/**
- * 
- * @param {array} credentials - array with two string elements, username and password
- * @description entering provided credentials into input boxes and clicks submit button
- */
-function enterSubmitCredentials(credentials) {
-    cy.get('form input').each(($el, index) => {
-        cy.wrap($el).type(credentials[index]);
-    });
-
-    cy.get('#login_btn').click();
-}
 
 describe('Login Function', () => {
 
@@ -45,7 +33,7 @@ describe('Login Function', () => {
 
         const validCredentials = [ 'TechGlobal', 'Test1234' ];
         
-        enterSubmitCredentials(validCredentials);
+        cy.enterSubmitCredentials(validCredentials);
 
         cy.get('#success_lgn').should('have.text', 'You are logged in');
 
@@ -61,7 +49,7 @@ describe('Login Function', () => {
 
         const validCredentials = [ 'TechGlobal', 'Test1234' ];
         
-        enterSubmitCredentials(validCredentials);
+        cy.enterSubmitCredentials(validCredentials);
         
         cy.get('#logout').click();
 
@@ -119,33 +107,33 @@ describe('Login Function', () => {
 
       const arr = [
         {
-          testDescription: 'Test Case 07 - Validate the invalid login with the empty credentials',
+          testDescription: 'Validate the invalid login with the empty credentials',
           username: '',
           password: '',
           errorMessage: 'Invalid Username entered!'
         },
         {
-          testDescription: 'Test Case 08 - Validate the invalid login with the wrong username',
+          testDescription: 'Validate the invalid login with the wrong username',
           username: 'John',
           password: 'Test1234',
           errorMessage: 'Invalid Username entered!'
         },
         {
-          testDescription: 'Test Case 09 - Validate the invalid login with the wrong password',
+          testDescription: 'Validate the invalid login with the wrong password',
           username: 'TechGlobal',
           password: '1234',
           errorMessage: 'Invalid Password entered!'
         },
         {
-          testDescription: 'Test Case 10 - Validate the invalid login with the wrong username and password',
+          testDescription: 'Validate the invalid login with the wrong username and password',
           username: 'John',
           password: '1234',
           errorMessage: 'Invalid Username entered!'
         }
       ];
 
-      arr.forEach((arrEl) => {
-        it(arrEl.testDescription, () => {
+      arr.forEach((arrEl, index) => {
+        it(`Test Case 0${index + 7} - ${arrEl.testDescription}`, () => {
           const credentials = [arrEl.username, arrEl.password];
           if(arrEl.username && arrEl.password) cy.get('form input').each(($el, index) => {
             cy.wrap($el).type(credentials[index]);
